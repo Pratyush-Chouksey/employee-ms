@@ -11,7 +11,7 @@
 // ──────────────────────────────────────────────────
 
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, KeyRound } from 'lucide-react';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -22,6 +22,12 @@ const LandingPage = () => {
   const portals = [
     { label: 'Admin Portal', path: '/login/admin' },
     { label: 'Employee Portal', path: '/login/employee' },
+  ];
+
+  // ── Demo Credentials ───────────────────────────
+  const demoCredentials = [
+    { role: 'Admin',    email: 'admin@pratyush.com', password: 'admin123' },
+    { role: 'Employee', email: 'john@pratyush.com',  password: 'john123'  },
   ];
 
   return (
@@ -104,10 +110,48 @@ const LandingPage = () => {
             ))}
           </div>
 
+          {/* ── Demo Credentials Card ────────────── */}
+          {/* A subtle info box so visitors can try the
+              site without creating an account. */}
+          <div className="mt-8 rounded-xl border border-indigo-100 bg-indigo-50/60 p-5">
+
+            {/* Header row with icon */}
+            <div className="flex items-center gap-2 mb-3">
+              <KeyRound size={16} className="text-indigo-500" />
+              <span className="text-sm font-semibold text-indigo-700">
+                Demo Credentials
+              </span>
+            </div>
+
+            {/* Credential rows */}
+            <div className="space-y-3">
+              {demoCredentials.map(({ role, email, password }) => (
+                <div
+                  key={role}
+                  className="rounded-lg bg-white/80 border border-indigo-100 px-4 py-3"
+                >
+                  {/* Role badge */}
+                  <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-indigo-600 bg-indigo-100 rounded-full px-2 py-0.5 mb-2">
+                    {role}
+                  </span>
+
+                  {/* Email & password in a tight 2-column grid */}
+                  <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+                    <span className="text-gray-400 font-medium">Email</span>
+                    <span className="text-gray-700 font-mono text-xs">{email}</span>
+
+                    <span className="text-gray-400 font-medium">Password</span>
+                    <span className="text-gray-700 font-mono text-xs">{password}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Footer — copyright notice pinned to the
-              bottom of the card area. mt-12 pushes it
-              down from the portal cards. */}
-          <p className="text-center text-xs text-gray-400 mt-12">
+              bottom of the card area. mt-8 pushes it
+              down from the demo credentials. */}
+          <p className="text-center text-xs text-gray-400 mt-8">
             © 2026 Pratyush. All rights reserved.
           </p>
         </div>
